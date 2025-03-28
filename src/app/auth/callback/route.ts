@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { getSiteUrl } from "@/lib/supabase";
 
 import type { NextRequest } from "next/server";
 
@@ -32,6 +33,7 @@ export async function GET(request: NextRequest) {
     await supabase.auth.exchangeCodeForSession(code);
   }
 
-  // URL to redirect to after sign in process completes
-  return NextResponse.redirect(new URL("/dashboard", request.url));
+  // Get the site URL and construct the dashboard URL
+  const siteUrl = getSiteUrl();
+  return NextResponse.redirect(new URL("/dashboard", siteUrl));
 }

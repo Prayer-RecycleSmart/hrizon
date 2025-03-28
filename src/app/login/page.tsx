@@ -6,17 +6,17 @@ import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import Link from 'next/link';
 
-import { createClient } from '@/lib/supabase';
+import { createClient, getSiteUrl } from '@/lib/supabase';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function Login() {
   const router = useRouter();
   const [authMode, setAuthMode] = useState<'sign_in' | 'sign_up'>('sign_in');
-  const [origin, setOrigin] = useState<string>('');
+  const [siteUrl, setSiteUrl] = useState<string>('');
   
   useEffect(() => {
-    // Set the origin once the component mounts (client-side only)
-    setOrigin(window.location.origin);
+    // Set the site URL once the component mounts (client-side only)
+    setSiteUrl(getSiteUrl());
   }, []);
 
   return (
@@ -40,7 +40,7 @@ export default function Login() {
             theme="light"
             showLinks={false}
             providers={[]}
-            redirectTo={origin ? `${origin}/auth/callback` : undefined}
+            redirectTo={siteUrl ? `${siteUrl}/auth/callback` : undefined}
           />
         </CardContent>
         <CardFooter className="flex justify-center">

@@ -47,6 +47,8 @@ cp .env.local.example .env.local
 ```
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+# For production, set your site URL
+NEXT_PUBLIC_SITE_URL=https://your-production-domain.com
 ```
 
 5. Start the development server
@@ -86,8 +88,22 @@ This project is configured for easy deployment on Vercel:
 
 1. Push your code to a GitHub repository
 2. Create a new project on Vercel
-3. Configure environment variables
+3. Configure environment variables in Vercel:
+   - `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase project URL
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anonymous key
+   - `NEXT_PUBLIC_SITE_URL`: Your production domain (e.g., https://your-app.vercel.app)
 4. Deploy!
+
+### Important Production Setup Steps
+
+1. **Configure Supabase Authentication**:
+   - Go to your Supabase project dashboard
+   - Navigate to Authentication > URL Configuration
+   - Update the Site URL to match your production domain
+   - Add additional redirect URLs for your production domain (e.g., https://your-app.vercel.app/auth/callback)
+
+2. **Update Environment Variables**:
+   - Make sure `NEXT_PUBLIC_SITE_URL` is set to your production URL in your Vercel project settings
 
 ## License
 
