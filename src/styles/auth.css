@@ -1,0 +1,91 @@
+/* Supabase Auth UI Overrides */
+
+.sbui-btn {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 40px !important;
+  margin-top: 8px !important;
+  padding: 0 16px !important;
+  background-color: var(--btn-bg) !important;
+  color: var(--btn-text) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: 6px !important;
+  text-align: center !important;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s !important;
+  cursor: pointer !important;
+}
+
+.sbui-btn:hover {
+  opacity: 0.9 !important;
+}
+
+.sbui-btn:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+.sbui-input {
+  width: 100% !important;
+  height: 40px !important;
+  padding: 0 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  transition: border-color 0.2s !important;
+}
+
+.sbui-input:focus {
+  border-color: var(--btn-bg) !important;
+  outline: none !important;
+}
+
+.sbui-label {
+  display: block !important;
+  margin-bottom: 4px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.sbui-divider {
+  margin: 16px 0 !important;
+}
+
+.sbui-typography-text {
+  font-size: 14px !important;
+}
+
+.sbui-space-x-1 > * + * {
+  margin-left: 4px !important;
+}
+
+.sbui-space-y-4 > * + * {
+  margin-top: 16px !important;
+}
+
+.sbui-auth-container {
+  width: 100% !important;
+}
+
+.sbui-auth-label {
+  font-weight: 500 !important;
+}
+
+.sbui-auth-error {
+  padding: 8px !important;
+  margin-top: 8px !important;
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  border: 1px solid rgba(239, 68, 68, 0.2) !important;
+  border-radius: 6px !important;
+  color: rgb(185, 28, 28) !important;
+  font-size: 14px !important;
+}
+
+/* Fix form button alignment issue */
+form[id*="auth-sign-in"] button,
+form[id*="auth-sign-up"] button {
+  margin-top: 16px !important;
+}
