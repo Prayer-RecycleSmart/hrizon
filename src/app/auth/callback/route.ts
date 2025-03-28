@@ -1,36 +1,37 @@
-import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
-import type { NextRequest } from 'next/server';
+import type { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
-  const code = requestUrl.searchParams.get('code');
-  
+  const code = requestUrl.searchParams.get("code");
+
   if (code) {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
+      process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
       {
         cookies: {
-          get(name: string) {
-            return cookieStore.get(name)?.value;
+          async get(name: string) {
+            const cookie = await cookieStore.get(name);
+            return cookie?.value;
           },
-          set(name: string, value: string, options: any) {
-            cookieStore.set({ name, value, ...options });
+          async set(name: string, value: string, options: any) {
+            await cookieStore.set({ name, value, ...options });
           },
-          remove(name: string, options: any) {
-            cookieStore.delete({ name, ...options });
+          async remove(name: string, options: any) {
+            await cookieStore.delete({ name, ...options });
           },
         },
       }
     );
-    
+
     await supabase.auth.exchangeCodeForSession(code);
   }
 
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(new URL('/dashboard', request.url));
+  return NextResponse.redirect(new URL("/dashboard", request.url));
 }
